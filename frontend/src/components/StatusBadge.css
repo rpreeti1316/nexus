@@ -1,0 +1,83 @@
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  font-size: var(--font-xs);
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  text-transform: capitalize;
+}
+
+.status-sm {
+  padding: 2px 8px;
+  font-size: 10px;
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+.status-todo {
+  background: var(--status-todo-bg);
+  color: var(--status-todo);
+}
+.status-todo .status-dot {
+  background: var(--status-todo);
+}
+
+.status-in-progress {
+  background: var(--status-progress-bg);
+  color: var(--status-progress);
+}
+.status-in-progress .status-dot {
+  background: var(--status-progress);
+  animation: pulse 2s infinite;
+}
+
+.status-done {
+  background: var(--status-done-bg);
+  color: var(--status-done);
+}
+.status-done .status-dot {
+  background: var(--status-done);
+}
+
+/* Priority Badge */
+.priority-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  border-radius: var(--radius-full);
+  font-size: var(--font-xs);
+  font-weight: 600;
+}
+
+.priority-size-sm {
+  padding: 2px 6px;
+  font-size: 10px;
+}
+
+.priority-icon {
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.priority-high {
+  background: var(--priority-high-bg);
+  color: var(--priority-high);
+}
+
+.priority-medium {
+  background: var(--priority-medium-bg);
+  color: var(--priority-medium);
+}
+
+.priority-low {
+  background: var(--priority-low-bg);
+  color: var(--priority-low);
+}

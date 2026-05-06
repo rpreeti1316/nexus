@@ -1,0 +1,47 @@
+.auth-page {
+  min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  padding: var(--space-lg); position: relative; overflow: hidden;
+  background: var(--gradient-hero);
+}
+.auth-bg-effects { position: absolute; inset: 0; pointer-events: none; }
+.auth-orb {
+  position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.15;
+  animation: float 8s ease-in-out infinite;
+}
+.auth-orb-1 { width: 400px; height: 400px; background: #6366f1; top: -10%; left: -5%; animation-delay: 0s; }
+.auth-orb-2 { width: 350px; height: 350px; background: #06b6d4; bottom: -10%; right: -5%; animation-delay: 2s; }
+.auth-orb-3 { width: 250px; height: 250px; background: #8b5cf6; top: 40%; right: 20%; animation-delay: 4s; }
+.auth-card {
+  width: 100%; max-width: 420px; position: relative; z-index: 1;
+  background: rgba(17,24,39,0.8); backdrop-filter: blur(24px);
+  border: 1px solid var(--border-default); border-radius: var(--radius-xl);
+  padding: var(--space-2xl); box-shadow: var(--shadow-xl);
+}
+.auth-header { text-align: center; margin-bottom: var(--space-xl); }
+.auth-logo { display: flex; justify-content: center; margin-bottom: var(--space-md); }
+.auth-title { font-size: var(--font-2xl); font-weight: 800; margin-bottom: var(--space-xs); }
+.auth-subtitle { color: var(--text-tertiary); font-size: var(--font-sm); }
+.auth-error {
+  background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3);
+  color: #f87171; padding: 10px 14px; border-radius: var(--radius-md);
+  font-size: var(--font-sm); margin-bottom: var(--space-md); text-align: center;
+}
+.auth-form { display: flex; flex-direction: column; gap: var(--space-md); }
+.auth-input-wrap {
+  position: relative; display: flex; align-items: center;
+}
+.auth-input-icon {
+  position: absolute; left: 14px; color: var(--text-muted); font-size: 16px;
+}
+.auth-input { padding-left: 42px; width: 100%; }
+.auth-submit { width: 100%; margin-top: var(--space-sm); }
+.auth-footer {
+  text-align: center; margin-top: var(--space-lg);
+  font-size: var(--font-sm); color: var(--text-tertiary);
+}
+.auth-link {
+  color: var(--accent-primary-hover); font-weight: 600;
+  transition: color var(--transition-fast);
+}
+.auth-link:hover { color: var(--accent-primary); text-decoration: underline; }
