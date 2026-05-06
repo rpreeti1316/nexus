@@ -14,6 +14,7 @@ A full-stack web application for creating projects, assigning tasks, and trackin
 - **Task Tracking** — Create tasks with priority, assignee, due dates
 - **Dashboard** — Overview with stats, recent activity, overdue alerts
 - **Role-Based Access Control**
+  - **Superadmin**: Global access to view and manage all projects on the platform.
   - **Admin**: Full CRUD on projects and tasks, manage members
   - **Member**: Can update task status only
 - **Responsive Design** — Works on desktop, tablet, and mobile
@@ -115,6 +116,12 @@ cd backend
 npm run dev
 ```
 
+*(Optional) To create the initial Superadmin account, run:*
+```bash
+node seed.js
+```
+*This will create `admin@nexus.com` with password `superadmin123`.*
+
 **Terminal 2 — Frontend:**
 ```bash
 cd frontend
@@ -184,14 +191,15 @@ The app will be available at `http://localhost:3000`
 
 ## 👥 Role-Based Access
 
-| Feature | Admin | Member |
-|---------|-------|--------|
-| View projects & tasks | ✅ | ✅ |
-| Create/edit/delete projects | ✅ | ❌ |
-| Add/remove members | ✅ | ❌ |
-| Create/edit/delete tasks | ✅ | ❌ |
-| Update task status | ✅ | ✅ |
-| View dashboard | ✅ | ✅ |
+| Feature | Superadmin | Admin | Member |
+|---------|------------|-------|--------|
+| View ALL projects | ✅ | ❌ | ❌ |
+| View assigned projects | ✅ | ✅ | ✅ |
+| Create/edit/delete projects | ✅ | ✅ | ❌ |
+| Add/remove members | ✅ | ✅ | ❌ |
+| Create/edit/delete tasks | ✅ | ✅ | ❌ |
+| Update task status | ✅ | ✅ | ✅ |
+| View dashboard | ✅ | ✅ | ✅ |
 
 ## 📝 License
 MIT
