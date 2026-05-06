@@ -2,9 +2,7 @@
 
 A full-stack web application for creating projects, assigning tasks, and tracking progress with **role-based access control (Admin/Member)**.
 
-## 🚀 Live Demo
-> **Frontend:** [https://frontend-production-a43d.up.railway.app](https://frontend-production-a43d.up.railway.app)
-> **Backend API:** [https://nexus-production-a5e5.up.railway.app](https://nexus-production-a5e5.up.railway.app)
+## 🚀 Live Demo[https://frontend-production-a43d.up.railway.app](https://frontend-production-a43d.up.railway.app)
 ## ✨ Features
 
 - **Authentication** — Signup/Login with JWT tokens
