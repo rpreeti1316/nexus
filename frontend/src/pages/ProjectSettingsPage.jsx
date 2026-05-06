@@ -23,6 +23,7 @@ const ProjectSettingsPage = () => {
   const [addingMember, setAddingMember] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const [confirmAction, setConfirmAction] = useState(null);
 
   useEffect(() => { fetchProject(); }, [id]);
 
@@ -75,8 +76,14 @@ const ProjectSettingsPage = () => {
     }
   };
 
-  const handleRemoveMember = async (userId, userName) => {
-    if (!confirm(`Remove ${userName} from this project?`)) return;
+  const handleRemoveMemberClick = (userId, userName) => {
+    setConfirmAction({ type: 'removeMember', data: { userId, userName } });
+  };
+
+  const executeRemoveMember = async () => {
+    if (!confirmAction) return;
+    const { userId } = confirmAction.data;
+    setConfirmAction(null);
     try {
       const res = await api.delete(`/projects/${id}/members/${userId}`);
       setProject(res.data);
@@ -96,8 +103,12 @@ const ProjectSettingsPage = () => {
     }
   };
 
-  const handleDeleteProject = async () => {
-    if (!confirm('Are you sure you want to delete this project and all its tasks? This cannot be undone.')) return;
+  const handleDeleteProjectClick = () => {
+    setConfirmAction({ type: 'deleteProject' });
+  };
+
+  const executeDeleteProject = async () => {
+    setConfirmAction(null);
     try {
       await api.delete(`/projects/${id}`);
       navigate('/projects');
@@ -188,7 +199,7 @@ const ProjectSettingsPage = () => {
                       <option value="member">Member</option>
                     </select>
                     <button className="btn-icon" title="Remove"
-                      onClick={() => handleRemoveMember(member.user._id, member.user.name)}>
+                      onClick={() => handleRemoveMemberClick(member.user._id, member.user.name)}>
                       <HiOutlineUserRemove size={16} />
                     </button>
                   </>
@@ -203,7 +214,7 @@ const ProjectSettingsPage = () => {
       <div className="settings-section glass-card danger-zone">
         <h3 className="settings-section-title danger-title">Danger Zone</h3>
         <p className="danger-text">Once you delete a project, there is no going back. All tasks will be permanently removed.</p>
-        <button className="btn btn-danger" onClick={handleDeleteProject}>
+        <button className="btn btn-danger" onClick={handleDeleteProjectClick}>
           <HiOutlineTrash size={16} /> Delete Project
         </button>
       </div>
@@ -230,6 +241,23 @@ const ProjectSettingsPage = () => {
             </button>
           </div>
         </form>
+      </Modal>
+
+      {/* Confirmation Modal */}
+      <Modal isOpen={!!confirmAction} onClose={() => setConfirmAction(null)} title="Confirm Action" size="small">
+        <div className="modal-content text-center">
+          <p style={{marginBottom: '20px', color: 'var(--text-primary)'}}>
+            {confirmAction?.type === 'removeMember' 
+              ? `Are you sure you want to remove ${confirmAction.data.userName} from this project?` 
+              : 'Are you sure you want to delete this project and all its tasks? This action cannot be undone.'}
+          </p>
+          <div className="modal-actions" style={{justifyContent: 'center', marginTop: '10px'}}>
+            <button className="btn btn-secondary" onClick={() => setConfirmAction(null)}>Cancel</button>
+            <button className="btn btn-danger" onClick={confirmAction?.type === 'removeMember' ? executeRemoveMember : executeDeleteProject}>
+              Confirm
+            </button>
+          </div>
+        </div>
       </Modal>
 
       <InstructionPanel 
