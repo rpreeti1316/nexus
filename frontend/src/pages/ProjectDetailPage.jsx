@@ -48,7 +48,8 @@ const ProjectDetailPage = () => {
   };
 
   const isAdmin = project?.owner?._id === user?.id ||
-    project?.members?.some(m => m.user?._id === user?.id && m.role === 'admin');
+    project?.members?.some(m => m.user?._id === user?.id && m.role === 'admin') ||
+    user?.role === 'superadmin';
 
   const openCreateModal = () => {
     setEditingTask(null);

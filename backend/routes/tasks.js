@@ -93,13 +93,15 @@ router.put('/tasks/:taskId', auth, async (req, res) => {
       return res.status(404).json({ message: 'Task not found' });
     }
 
-    // Verify user is a member of the task's project
+    const isSuperadmin = req.user.role === 'superadmin';
+
+    // Verify user is a member of the task's project OR superadmin
     const project = await Project.findById(task.project);
-    if (!project || !project.isMember(req.user._id)) {
+    if (!project || (!isSuperadmin && !project.isMember(req.user._id))) {
       return res.status(403).json({ message: 'You are not a member of this project' });
     }
 
-    const isAdmin = project.isAdmin(req.user._id);
+    const isAdmin = isSuperadmin || project.isAdmin(req.user._id);
 
     // Members can only update status
     if (!isAdmin) {
@@ -150,9 +152,11 @@ router.delete('/tasks/:taskId', auth, async (req, res) => {
       return res.status(404).json({ message: 'Task not found' });
     }
 
-    // Verify user is admin of the task's project
+    const isSuperadmin = req.user.role === 'superadmin';
+
+    // Verify user is admin of the task's project OR superadmin
     const project = await Project.findById(task.project);
-    if (!project || !project.isAdmin(req.user._id)) {
+    if (!project || (!isSuperadmin && !project.isAdmin(req.user._id))) {
       return res.status(403).json({ message: 'Admin access required to delete tasks' });
     }
 
